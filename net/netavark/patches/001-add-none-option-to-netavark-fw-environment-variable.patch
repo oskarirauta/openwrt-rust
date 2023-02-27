@@ -1,0 +1,100 @@
+From 02e92f35377cc5bab94727bcf8f59b1497a789b2 Mon Sep 17 00:00:00 2001
+From: Oskari Rauta <oskari.rauta@gmail.com>
+Date: Mon, 20 Feb 2023 09:52:48 +0000
+Subject: [PATCH] add new fwnone option to NETAVARK_FW environment variable
+
+if "none" is set to NETAVARK_FW environment variable, all
+firewalling is completely disabled.
+
+Signed-off-by: Oskari Rauta <oskari.rauta@gmail.com>
+---
+ src/firewall/fwnone.rs | 31 +++++++++++++++++++++++++++++++
+ src/firewall/mod.rs    | 11 +++++++++--
+ 2 files changed, 40 insertions(+), 2 deletions(-)
+ create mode 100644 src/firewall/fwnone.rs
+
+diff --git a/src/firewall/fwnone.rs b/src/firewall/fwnone.rs
+new file mode 100644
+index 00000000..ac70558e
+--- /dev/null
++++ b/src/firewall/fwnone.rs
+@@ -0,0 +1,31 @@
++use crate::firewall::NetavarkResult;
++use crate::firewall;
++use crate::network::internal_types::{SetupNetwork, PortForwardConfig, TearDownNetwork, TeardownPortForward};
++
++// Iptables driver - uses direct iptables commands via the iptables crate.
++pub struct Fwnone {
++}
++
++pub fn new() -> NetavarkResult<Box<dyn firewall::FirewallDriver>> {
++    Ok(Box::new(Fwnone {}))
++}
++
++impl firewall::FirewallDriver for Fwnone {
++    fn setup_network(&self, _network_setup: SetupNetwork) -> NetavarkResult<()> {
++        Ok(())
++    }
++
++    // teardown_network should only be called in the case of
++    // a complete teardown.
++    fn teardown_network(&self, _tear: TearDownNetwork) -> NetavarkResult<()> {
++        Result::Ok(())
++    }
++
++    fn setup_port_forward(&self, _setup_portfw: PortForwardConfig) -> NetavarkResult<()> {
++        Result::Ok(())
++    }
++
++    fn teardown_port_forward(&self, _tear: TeardownPortForward) -> NetavarkResult<()> {
++        Result::Ok(())
++    }
++}
+diff --git a/src/firewall/mod.rs b/src/firewall/mod.rs
+index 2a28150e..e42c6582 100644
+--- a/src/firewall/mod.rs
++++ b/src/firewall/mod.rs
+@@ -8,6 +8,7 @@ use zbus::blocking::Connection;
+ 
+ pub mod firewalld;
+ pub mod iptables;
++pub mod fwnone;
+ mod varktables;
+ 
+ /// Firewall drivers have the ability to set up per-network firewall forwarding
+@@ -29,12 +30,13 @@ enum FirewallImpl {
+     Iptables,
+     Firewalld(Connection),
+     Nftables,
++    Fwnone,
+ }
+ 
+ /// What firewall implementations does this system support?
+ fn get_firewall_impl() -> NetavarkResult<FirewallImpl> {
+     // First, check the NETAVARK_FW env var.
+-    // It respects "firewalld", "iptables", "nftables".
++    // It respects "firewalld", "iptables", "nftables", "none".
+     if let Ok(var) = env::var("NETAVARK_FW") {
+         debug!("Forcibly using firewall driver {}", var);
+         match var.to_lowercase().as_str() {
+@@ -52,6 +54,7 @@ fn get_firewall_impl() -> NetavarkResult<FirewallImpl> {
+             }
+             "iptables" => return Ok(FirewallImpl::Iptables),
+             "nftables" => return Ok(FirewallImpl::Nftables),
++            "none" => return Ok(FirewallImpl::Fwnone),
+             any => {
+                 return Err(NetavarkError::Message(format!(
+                     "Must provide a valid firewall backend, got {}",
+@@ -100,7 +103,11 @@ pub fn get_supported_firewall_driver() -> NetavarkResult<Box<dyn FirewallDriver>
+                 Err(NetavarkError::msg(
+                     "nftables support presently not available",
+                 ))
+-            }
++            },
++            FirewallImpl::Fwnone => {
++                info!("Not using firewall");
++                fwnone::new()
++            },
+         },
+         Err(e) => Err(e),
+     }

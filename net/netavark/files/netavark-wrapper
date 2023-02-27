@@ -1,0 +1,3 @@
+#!/bin/sh
+
+NETAVARK_FW="fwnone" /usr/lib/podman/netavark-bin $@
