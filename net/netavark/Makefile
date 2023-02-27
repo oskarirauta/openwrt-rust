@@ -13,7 +13,7 @@ PKG_BUILD_DEPENDS:=rust/host
 include ../../lang/rust/rust-package.mk
 include $(INCLUDE_DIR)/package.mk
 
-RUST_ENV += \
+CARGO_VARS += \
 	PROTOC=$(STAGING_DIR)/usr/lib
 
 define Build/Compile
