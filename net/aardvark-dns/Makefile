@@ -10,7 +10,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/containers/aardvark-dns/archive/v1.5.0/
-PKG_HASH:=skip
+PKG_HASH:=b7e7ca1b94c1a62c8800f49befb803ec37cc5caf7656352537343a8fb654e4a6
 
 PKG_BUILD_DEPENDS:=rust/host
 
