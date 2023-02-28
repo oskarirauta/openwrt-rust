@@ -18,7 +18,7 @@ include ../../lang/rust/rust-package.mk
 include $(INCLUDE_DIR)/package.mk
 
 CARGO_VARS += \
-	PROTOC=$(STAGING_DIR)/usr/lib
+	PROTOC=$(STAGING_DIR_HOSTPKG)/bin/protoc
 
 define Build/Compile
 	$(call Build/Compile/Cargo,,)
