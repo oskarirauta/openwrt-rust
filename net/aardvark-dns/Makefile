@@ -18,11 +18,11 @@ include ../../lang/rust/rust-package.mk
 include $(INCLUDE_DIR)/package.mk
 
 define Package/aardvark-dns
-    SECTION:=net
-    CATEGORY:=Network
-    DEPENDS:=$(RUST_ARCH_DEPENDS)
-    TITLE:=authoritative dns server for container records
-    URL:=https://github.com/containers/aardvark-dns
+  SECTION:=net
+  CATEGORY:=Network
+  DEPENDS:=$(RUST_ARCH_DEPENDS)
+  TITLE:=authoritative dns server for container records
+  URL:=https://github.com/containers/aardvark-dns
 endef
 
 define Package/aardvark-dns/description
