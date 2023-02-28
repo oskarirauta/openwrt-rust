@@ -18,11 +18,11 @@ include ../../lang/rust/rust-package.mk
 include $(INCLUDE_DIR)/package.mk
 
 define Package/netavark
-    SECTION:=net
-    CATEGORY:=Network
-    DEPENDS:=$(RUST_ARCH_DEPENDS)
-    TITLE:=A container network stack
-    URL:=https://github.com/containers/netavark
+  SECTION:=net
+  CATEGORY:=Network
+  DEPENDS:=$(RUST_ARCH_DEPENDS)
+  TITLE:=A container network stack
+  URL:=https://github.com/containers/netavark
 endef
 
 define Package/netavark/description
