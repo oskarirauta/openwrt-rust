@@ -17,13 +17,6 @@ PKG_BUILD_DEPENDS:=rust/host
 include ../../lang/rust/rust-package.mk
 include $(INCLUDE_DIR)/package.mk
 
-CARGO_VARS += \
-	PROTOC=$(STAGING_DIR_HOSTPKG)/bin/protoc
-
-define Build/Compile
-	$(call Build/Compile/Cargo,,)
-endef
-
 define Package/netavark
     SECTION:=net
     CATEGORY:=Network
@@ -35,6 +28,13 @@ endef
 define Package/netavark/description
   Netavark is a rust based network stack for containers. It is being designed to work with Podman but is also
   applicable for other OCI container management applications.
+endef
+
+CARGO_VARS += \
+	PROTOC=$(STAGING_DIR_HOSTPKG)/bin/protoc
+
+define Build/Compile
+	$(call Build/Compile/Cargo,,)
 endef
 
 define Package/netavark/install
