@@ -5,7 +5,7 @@ PKG_VERSION:=1.5.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/containers/aardvark-dns/archive/v1.5.0/
+PKG_SOURCE_URL:=https://github.com/containers/aardvark-dns/archive/v$(PKG_VERSION)/
 PKG_HASH:=b7e7ca1b94c1a62c8800f49befb803ec37cc5caf7656352537343a8fb654e4a6
 
 PKG_MAINTAINER:=Oskari Rauta <oskari.rauta@gmail.com>
@@ -16,11 +16,6 @@ PKG_BUILD_DEPENDS:=rust/host
 
 include ../../lang/rust/rust-package.mk
 include $(INCLUDE_DIR)/package.mk
-
-define Build/Compile
-	$(call Build/Compile/Cargo,,)
-	# --features 'pcre2')
-endef
 
 define Package/aardvark-dns
     SECTION:=net
@@ -36,6 +31,10 @@ define Package/aardvark-dns/description
 
   It is mostly intended to be used with Netavark which will
   launch it automatically if both are installed.
+endef
+
+define Build/Compile
+	$(call Build/Compile/Cargo,,)
 endef
 
 define Package/aardvark-dns/install
