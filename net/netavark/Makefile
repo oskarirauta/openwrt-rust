@@ -43,6 +43,8 @@ define Package/netavark/install
 	$(INSTALL_DIR) $(1)/usr/lib/podman
 	$(INSTALL_BIN) ./files/netavark-wrapper $(1)/usr/lib/podman/netavark
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/bin/netavark $(1)/usr/lib/podman/netavark-bin
+	[ "$(CONFIG_NO_STRIP)" = "y" ] && \
+		STRIP=$(STAGING_DIR_HOST)/bin/sstrip $(SCRIPT_DIR)/rstrip.sh $(1)/usr/lib/podman
 endef
 
 $(eval $(call BuildPackage,netavark))
