@@ -40,8 +40,6 @@ endef
 define Package/aardvark-dns/install
 	$(INSTALL_DIR) $(1)/usr/lib/podman
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/bin/aardvark-dns $(1)/usr/lib/podman/
-	[ "$(CONFIG_NO_STRIP)" = "y" ] && \
-		STRIP=$(STAGING_DIR_HOST)/bin/sstrip $(SCRIPT_DIR)/rstrip.sh $(1)/usr/lib/podman
 endef
 
 $(eval $(call BuildPackage,aardvark-dns))
