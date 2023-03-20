@@ -1,12 +1,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=aardvark-dns
-PKG_VERSION:=1.5.0
+PKG_VERSION:=1.6.0
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/containers/aardvark-dns/archive/v$(PKG_VERSION)/
-PKG_HASH:=b7e7ca1b94c1a62c8800f49befb803ec37cc5caf7656352537343a8fb654e4a6
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL:=https://github.com/containers/aardvark-dns.git
+PKG_SOURCE_DATA:=2023-03-20
+PKG_SOURCE_VERSION:=a3ed7d9ab30fcf57cff01c465fb329fa0a77aab1
+PKG_MIRROR_HASH:=skip
 
 PKG_MAINTAINER:=Oskari Rauta <oskari.rauta@gmail.com>
 PKG_LICENSE:=Apache-2.0
