@@ -8,7 +8,7 @@ PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/containers/aardvark-dns.git
 PKG_SOURCE_DATA:=2023-03-20
 PKG_SOURCE_VERSION:=a3ed7d9ab30fcf57cff01c465fb329fa0a77aab1
-PKG_MIRROR_HASH:=skip
+PKG_MIRROR_HASH:=37964fea0f978124c5d706d308f88097f9877060cfa0463b2497cdaa3ef663f2
 
 PKG_MAINTAINER:=Oskari Rauta <oskari.rauta@gmail.com>
 PKG_LICENSE:=Apache-2.0
