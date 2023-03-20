@@ -4,9 +4,11 @@ PKG_NAME:=netavark
 PKG_VERSION:=1.5.0
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/containers/netavark/archive/v1.5.0/
-PKG_HASH:=303fbcf3fc645b0e8e8fc1759626c92082f85f49b9d07672918aebd496a24d34
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL:=https://github.com/containers/netavark.git
+PKG_SOURCE_DATA:=2023-03-20
+PKG_SOURCE_VERSION:=c2222792c2c95c508c13e69dac55673da7203027
+PKG_MIRROR_HASH:=236228d8c639e4a3926a35030d98e4482b0ebb8146c9ab2bbe40266b58b71a9f
 
 PKG_MAINTAINER:=Oskari Rauta <oskari.rauta@gmail.com>
 PKG_LICENSE:=Apache-2.0
