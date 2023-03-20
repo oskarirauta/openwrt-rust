@@ -10,7 +10,7 @@ and distribution-specific quirks instead of polluting the main musl target of
 `$arch-unknown-linux-musl`.
 
 --- /dev/null
-+++ rustc-1.48.0-src/compiler/rustc_target/src/spec/aarch64_openwrt_linux_musl.rs
++++ b/compiler/rustc_target/src/spec/aarch64_openwrt_linux_musl.rs
 @@ -0,0 +1,13 @@
 +use crate::spec::Target;
 +
@@ -26,7 +26,7 @@ and distribution-specific quirks instead of polluting the main musl target of
 +    base
 +}
 --- /dev/null
-+++ rustc-1.48.0-src/compiler/rustc_target/src/spec/armv6_openwrt_linux_musleabihf.rs
++++ b/compiler/rustc_target/src/spec/armv6_openwrt_linux_musleabihf.rs
 @@ -0,0 +1,13 @@
 +use crate::spec::Target;
 +
@@ -42,7 +42,7 @@ and distribution-specific quirks instead of polluting the main musl target of
 +    base
 +}
 --- /dev/null
-+++ rustc-1.48.0-src/compiler/rustc_target/src/spec/armv7_openwrt_linux_musleabihf.rs
++++ b/compiler/rustc_target/src/spec/armv7_openwrt_linux_musleabihf.rs
 @@ -0,0 +1,14 @@
 +use crate::spec::Target;
 +
@@ -59,7 +59,7 @@ and distribution-specific quirks instead of polluting the main musl target of
 +    base
 +}
 --- /dev/null
-+++ rustc-1.48.0-src/compiler/rustc_target/src/spec/i586_openwrt_linux_musl.rs
++++ b/compiler/rustc_target/src/spec/i586_openwrt_linux_musl.rs
 @@ -0,0 +1,14 @@
 +use crate::spec::Target;
 +
@@ -75,9 +75,9 @@ and distribution-specific quirks instead of polluting the main musl target of
 +
 +    base
 +}
---- rustc-1.48.0-src.orig/compiler/rustc_target/src/spec/mod.rs
-+++ rustc-1.48.0-src/compiler/rustc_target/src/spec/mod.rs
-@@ -490,6 +490,16 @@
+--- a/compiler/rustc_target/src/spec/mod.rs
++++ b/compiler/rustc_target/src/spec/mod.rs
+@@ -1013,6 +1013,16 @@ macro_rules! supported_targets {
  }
  
  supported_targets! {
@@ -95,7 +95,7 @@ and distribution-specific quirks instead of polluting the main musl target of
      ("x86_64-unknown-linux-gnux32", x86_64_unknown_linux_gnux32),
      ("i686-unknown-linux-gnu", i686_unknown_linux_gnu),
 --- /dev/null
-+++ rustc-1.48.0-src/compiler/rustc_target/src/spec/powerpc64_openwrt_linux_musl.rs
++++ b/compiler/rustc_target/src/spec/powerpc64_openwrt_linux_musl.rs
 @@ -0,0 +1,13 @@
 +use crate::spec::Target;
 +
@@ -111,7 +111,7 @@ and distribution-specific quirks instead of polluting the main musl target of
 +    base
 +}
 --- /dev/null
-+++ rustc-1.48.0-src/compiler/rustc_target/src/spec/powerpc64le_openwrt_linux_musl.rs
++++ b/compiler/rustc_target/src/spec/powerpc64le_openwrt_linux_musl.rs
 @@ -0,0 +1,13 @@
 +use crate::spec::Target;
 +
@@ -127,7 +127,7 @@ and distribution-specific quirks instead of polluting the main musl target of
 +    base
 +}
 --- /dev/null
-+++ rustc-1.48.0-src/compiler/rustc_target/src/spec/powerpc_openwrt_linux_musl.rs
++++ b/compiler/rustc_target/src/spec/powerpc_openwrt_linux_musl.rs
 @@ -0,0 +1,13 @@
 +use crate::spec::Target;
 +
@@ -143,7 +143,7 @@ and distribution-specific quirks instead of polluting the main musl target of
 +    base
 +}
 --- /dev/null
-+++ rustc-1.48.0-src/compiler/rustc_target/src/spec/s390x_openwrt_linux_musl.rs
++++ b/compiler/rustc_target/src/spec/s390x_openwrt_linux_musl.rs
 @@ -0,0 +1,13 @@
 +use crate::spec::Target;
 +
@@ -159,7 +159,7 @@ and distribution-specific quirks instead of polluting the main musl target of
 +    base
 +}
 --- /dev/null
-+++ rustc-1.48.0-src/compiler/rustc_target/src/spec/x86_64_openwrt_linux_musl.rs
++++ b/compiler/rustc_target/src/spec/x86_64_openwrt_linux_musl.rs
 @@ -0,0 +1,13 @@
 +use crate::spec::Target;
 +
@@ -175,7 +175,7 @@ and distribution-specific quirks instead of polluting the main musl target of
 +    base
 +}
 --- /dev/null
-+++ rustc-1.52.1-src/compiler/rustc_target/src/spec/riscv64_openwrt_linux_musl.rs
++++ b/compiler/rustc_target/src/spec/riscv64_openwrt_linux_musl.rs
 @@ -0,0 +1,13 @@
 +use crate::spec::Target;
 +
