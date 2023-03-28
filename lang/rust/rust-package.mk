@@ -28,6 +28,7 @@ define Build/Compile/Cargo
 		TARGET_CFLAGS="$(TARGET_CFLAGS) $(RUST_CFLAGS)" \
 		TARGET_CC=$(TARGET_CC_NOCACHE) \
 		CC=$(HOSTCC) \
+		$(CARGO_VARS) \
 		cargo install -v \
 			--profile stripped \
 			--target $(RUSTC_TARGET_ARCH) \
