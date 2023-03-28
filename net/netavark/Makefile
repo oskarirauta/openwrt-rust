@@ -47,4 +47,5 @@ define Package/netavark/install
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/bin/netavark $(1)/usr/lib/podman/netavark-bin
 endef
 
+$(eval $(call RustBinPackage,netavark))
 $(eval $(call BuildPackage,netavark))
