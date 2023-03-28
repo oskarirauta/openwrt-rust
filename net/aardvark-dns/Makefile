@@ -44,4 +44,5 @@ define Package/aardvark-dns/install
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/bin/aardvark-dns $(1)/usr/lib/podman/
 endef
 
+$(eval $(call RustBinPackage,aardvark-dns))
 $(eval $(call BuildPackage,aardvark-dns))
