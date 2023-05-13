@@ -6,9 +6,9 @@ PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/containers/netavark.git
-PKG_SOURCE_DATA:=2023-03-20
-PKG_SOURCE_VERSION:=c2222792c2c95c508c13e69dac55673da7203027
-PKG_MIRROR_HASH:=92242b44cec82768a9a14fb5e9e8a25860346a22789c661ace000f705f76f4bd
+PKG_SOURCE_DATE:=2023-05-12
+PKG_SOURCE_VERSION:=07d63eadef1def977f2ece25b0f464f7e5d77be1
+PKG_MIRROR_HASH:=skip
 
 PKG_MAINTAINER:=Oskari Rauta <oskari.rauta@gmail.com>
 PKG_LICENSE:=Apache-2.0
@@ -34,6 +34,10 @@ define Package/netavark/description
   applicable for other OCI container management applications.
 endef
 
+define Package/netavark/conffiles
+  /etc/config/netavark
+endef
+
 CARGO_VARS += \
 	PROTOC=$(STAGING_DIR_HOSTPKG)/bin/protoc
 
@@ -42,7 +46,8 @@ define Build/Compile
 endef
 
 define Package/netavark/install
-	$(INSTALL_DIR) $(1)/usr/lib/podman
+	$(INSTALL_DIR) $(1)/etc/config $(1)/usr/lib/podman
+	$(INSTALL_CONF) ./files/netavark-config $(1)/etc/config/netavark
 	$(INSTALL_BIN) ./files/netavark-wrapper $(1)/usr/lib/podman/netavark
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/bin/netavark $(1)/usr/lib/podman/netavark-bin
 endef
