@@ -81,6 +81,9 @@ HOST_CONFIGURE_ARGS = \
 	--set=llvm.download-ci-llvm=true \
 	$(TARGET_CONFIGURE_ARGS)
 
+HOST_CFLAGS += -D_LARGEFILE64_SOURCE
+TARGET_CFLAGS += -D_LARGEFILE64_SOURCE
+
 define Host/Uninstall
 	# Call the Uninstall script
 	[ -f $(RUST_UNINSTALL) ] && \
