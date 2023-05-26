@@ -6,13 +6,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=rust
 PKG_VERSION:=1.69.0
-#1.68.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=rustc-$(PKG_VERSION)-src.tar.gz
 PKG_SOURCE_URL:=https://static.rust-lang.org/dist/
 PKG_HASH:=fb05971867ad6ccabbd3720279f5a94b99f61024923187b56bb5c455fa3cf60f
-#ccb051df5701d4c588e3d0558f83e73e7eea0a9b165dab3e39dd2db8a6a25d03
 HOST_BUILD_DIR:=$(BUILD_DIR_HOST)/rustc-$(PKG_VERSION)-src
 
 PKG_MAINTAINER:=Luca Barbato <lu_zero@luminem.org>
@@ -81,11 +79,6 @@ HOST_CONFIGURE_ARGS = \
 	--set=llvm.download-ci-llvm=true \
 	$(TARGET_CONFIGURE_ARGS)
 
-HOST_CFLAGS += -D_LARGEFILE64_SOURCE
-HOST_CXXFLAGS += -D_LARGEFILE64_SOURCE
-TARGET_CFLAGS += -D_LARGEFILE64_SOURCE
-TARGET_CXXFLAGS += -D_LARGEFILE64_SOURCE
-
 define Host/Uninstall
 	# Call the Uninstall script
 	[ -f $(RUST_UNINSTALL) ] && \
@@ -95,6 +88,8 @@ endef
 define Host/Compile
 	( \
 		cd $(HOST_BUILD_DIR) ; \
+		sed 's/#deny-warnings = .*/deny-warnings = false/' -i config.toml ; \
+		sed 's|deny(warnings,|deny(|' -i src/bootstrap/lib.rs ; \
 		$(PYTHON) x.py --config ./config.toml dist build-manifest cargo llvm-tools \
 			rustc rust-std rust-src ; \
 	)
