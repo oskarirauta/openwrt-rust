@@ -1,7 +1,7 @@
-From b74dbd080ea75ebcc371732ddbfeb81c96b8c5d5 Mon Sep 17 00:00:00 2001
+From d3000458501d339ea2043006924d431ead18769e Mon Sep 17 00:00:00 2001
 From: Luca Barbato <lu_zero@gentoo.org>
-Date: Fri, 10 Mar 2023 18:24:14 +0100
-Subject: [PATCH] Update xz2 and lzma-sys
+Date: Sun, 4 Jun 2023 19:32:28 +0000
+Subject: [PATCH] Update xz2 and use it static
 
 ---
  Cargo.lock               | 8 ++++----
@@ -11,7 +11,7 @@ Subject: [PATCH] Update xz2 and lzma-sys
 
 --- a/Cargo.lock
 +++ b/Cargo.lock
-@@ -2471,9 +2471,9 @@ dependencies = [
+@@ -3085,9 +3085,9 @@ dependencies = [
  
  [[package]]
  name = "lzma-sys"
@@ -23,7 +23,7 @@ Subject: [PATCH] Update xz2 and lzma-sys
  dependencies = [
   "cc",
   "libc",
-@@ -6324,9 +6324,9 @@ dependencies = [
+@@ -7116,9 +7116,9 @@ dependencies = [
  
  [[package]]
  name = "xz2"
@@ -37,7 +37,7 @@ Subject: [PATCH] Update xz2 and lzma-sys
  ]
 --- a/src/bootstrap/Cargo.lock
 +++ b/src/bootstrap/Cargo.lock
-@@ -357,9 +357,9 @@ dependencies = [
+@@ -389,9 +389,9 @@ dependencies = [
  
  [[package]]
  name = "lzma-sys"
@@ -49,7 +49,7 @@ Subject: [PATCH] Update xz2 and lzma-sys
  dependencies = [
   "cc",
   "libc",
-@@ -788,9 +788,9 @@ dependencies = [
+@@ -847,9 +847,9 @@ dependencies = [
  
  [[package]]
  name = "xz2"
@@ -63,7 +63,7 @@ Subject: [PATCH] Update xz2 and lzma-sys
  ]
 --- a/src/bootstrap/Cargo.toml
 +++ b/src/bootstrap/Cargo.toml
-@@ -50,7 +50,7 @@ toml = "0.5"
+@@ -51,7 +51,7 @@ toml = "0.5"
  ignore = "0.4.10"
  opener = "0.5"
  once_cell = "1.7.2"
