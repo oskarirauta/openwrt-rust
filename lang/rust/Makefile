@@ -3,15 +3,16 @@
 # Copyright (C) 2023 Luca Barbato and Donald Hoskins
 
 include $(TOPDIR)/rules.mk
+include ./rust-values.mk
 
 PKG_NAME:=rust
-PKG_VERSION:=1.70.0
-PKG_RELEASE:=2
+PKG_VERSION:=1.72.1
+PKG_RELEASE:=1
 
 PKG_SOURCE:=rustc-$(PKG_VERSION)-src.tar.gz
 PKG_SOURCE_URL:=https://static.rust-lang.org/dist/
-PKG_HASH:=b2bfae000b7a5040e4ec4bbc50a09f21548190cb7570b0ed77358368413bd27c
-HOST_BUILD_DIR:=$(BUILD_DIR_HOST)/rustc-$(PKG_VERSION)-src
+PKG_HASH:=7f48845f6a52cdbb5d63fb0528fd5f520eb443275b55f98e328159f86568f895
+HOST_BUILD_DIR:=$(BUILD_DIR)/host/rust-$(RUSTC_TARGET_ARCH)/rustc-$(PKG_VERSION)-src
 
 PKG_MAINTAINER:=Luca Barbato <lu_zero@luminem.org>
 PKG_LICENSE:=Apache-2.0 MIT
@@ -22,7 +23,6 @@ PKG_HOST_ONLY:=1
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
-include ./rust-values.mk
 
 define Package/rust
   SECTION:=lang
@@ -50,15 +50,10 @@ TARGET_CONFIGURE_ARGS = \
 	--set=target.$(RUSTC_TARGET_ARCH).linker=$(TARGET_CC_NOCACHE) \
 	--set=target.$(RUSTC_TARGET_ARCH).ranlib=$(TARGET_RANLIB) \
 	--set=target.$(RUSTC_TARGET_ARCH).crt-static=false \
-	--set=rust.codegen-units=1 \
-	--set=rust.codegen-units-std=1 \
-	--set=rust.parallel-compiler=false \
-	--tools="analysis,cargo,clippy,src,rustfmt" \
 	$(if $(CONFIG_USE_MUSL),--set=target.$(RUSTC_TARGET_ARCH).musl-root=$(TOOLCHAIN_DIR))
 
 # CARGO_HOME is an environmental
-HOST_CONFIGURE_OPTS += CARGO_HOME="$(CARGO_HOME)" PKG_CONFIG_ALLOW_CROSS=1
-HOST_MAKE_VARS += PKG_CONFIG_ALLOW_CROSS=1
+HOST_CONFIGURE_OPTS += CARGO_HOME="$(CARGO_HOME)"
 
 # Rust Configuration Arguments
 HOST_CONFIGURE_ARGS = \
@@ -88,8 +83,6 @@ endef
 define Host/Compile
 	( \
 		cd $(HOST_BUILD_DIR) ; \
-		sed 's/#deny-warnings = .*/deny-warnings = false/' -i config.toml ; \
-		sed 's|deny(warnings,|deny(|' -i src/bootstrap/lib.rs ; \
 		$(PYTHON) x.py --config ./config.toml dist build-manifest cargo llvm-tools \
 			rustc rust-std rust-src ; \
 	)

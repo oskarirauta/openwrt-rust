@@ -1,3 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
+#
+# Copyright (C) 2023 Luca Barbato and Donald Hoskins
+
 ifeq ($(origin RUST_INCLUDE_DIR),undefined)
   RUST_INCLUDE_DIR:=$(dir $(lastword $(MAKEFILE_LIST)))
 endif
