@@ -3,15 +3,14 @@
 # Copyright (C) 2023 Luca Barbato and Donald Hoskins
 
 include $(TOPDIR)/rules.mk
-include ./rust-values.mk
 
 PKG_NAME:=rust
-PKG_VERSION:=1.72.1
+PKG_VERSION:=1.73.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=rustc-$(PKG_VERSION)-src.tar.gz
 PKG_SOURCE_URL:=https://static.rust-lang.org/dist/
-PKG_HASH:=7f48845f6a52cdbb5d63fb0528fd5f520eb443275b55f98e328159f86568f895
+PKG_HASH:=96d62e6d1f2d21df7ac8acb3b9882411f9e7c7036173f7f2ede9e1f1f6b1bb3a
 HOST_BUILD_DIR:=$(BUILD_DIR)/host/rust-$(RUSTC_TARGET_ARCH)/rustc-$(PKG_VERSION)-src
 
 PKG_MAINTAINER:=Luca Barbato <lu_zero@luminem.org>
@@ -23,6 +22,7 @@ PKG_HOST_ONLY:=1
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
+include ./rust-values.mk
 
 define Package/rust
   SECTION:=lang
@@ -31,6 +31,7 @@ define Package/rust
   TITLE:=Rust Programming Language Compiler
   URL:=https://www.rust-lang.org/
   DEPENDS:=$(RUST_ARCH_DEPENDS)
+  BUILDONLY:=1
 endef
 
 define Package/rust/description
